@@ -1,0 +1,29 @@
+{
+  "name": "docker-lamp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker:kill": "bash bash/clean-docker.sh",
+    "docker:build": "docker compose -f docker-compose.yml build",
+    "docker:build:up": "npm run docker:build && npm run docker:up",
+    "docker:rebuild": "npm run docker:clean && npm run docker:build:up",
+    "docker:restart": "npm run docker:clean && npm run docker:up",
+    "docker:up": "docker compose -f docker-compose.yml up -d",
+    "docker:down": "docker compose down --remove-orphans && npm run docker:kill",
+    "docker:clean": "npm run docker:down && docker system prune -f",
+    "docker:bash:php": "docker-compose exec php-apache /bin/bash",
+    "docker:bash:db": "docker-compose exec database /bin/bash"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fecoderchinh/docker-lamp-stack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fecoderchinh/docker-lamp-stack/issues"
+  },
+  "homepage": "https://github.com/fecoderchinh/docker-lamp-stack#readme"
+}

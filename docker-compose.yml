@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  database:
+    image: mysql:${MYSQL_VERSION:-latest}
+    container_name: database
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_USER: "${DB_USERNAME}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+    volumes:
+      - ./data:/var/lib/mysql:rw
+      # Uncomment if you want to run your own init-db
+      #- ./db-dump:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+#    Uncomment if you want to setup your database charset
+#    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+  php-apache:
+    container_name: php-apache
+    build:
+      context: ./php
+    ports:
+      - '8080:80'
+    volumes:
+      - ${PROJECT_ROOT}:/var/www/laravel_docker
+      - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+    depends_on:
+      - database
