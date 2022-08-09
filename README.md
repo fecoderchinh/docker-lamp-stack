@@ -25,12 +25,12 @@ npm run docker:rebuild
 npm run docker:clean
 ```
 ## Run laravel artisan
-Then you can use your `artisan` commands
 ```
 npm run docker:bash:php
 ```
+Then you can use your `artisan`
 ## Run database
-Then you can try to enter into `mysql -uroot -p`
 ```
 npm run docker:bash:db
 ```
+Then you can use `mysql -uroot -p`
