@@ -8,6 +8,11 @@ Ports used in the project:
 |-------------- | -------------- |
 | **apache** | 8080 |
 | **mysql** | 3306 |
+#### IF you are facing with PORT problems, then you should change the PORT number in `.env`
+```
+DB_PORT=3306
+APACHE_PORT=8080
+```
 
 Clone `.env.example` to `.env` and set up as your prefer detail
 
